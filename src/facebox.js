@@ -84,6 +84,7 @@
     settings: {
       opacity      : 0.2,
       overlay      : true,
+      type         : 'GET',
       loadingImage : '/facebox/loading.gif',
       closeImage   : '/facebox/closelabel.png',
       imageTypes   : [ 'png', 'jpg', 'jpeg', 'gif' ],
@@ -260,7 +261,9 @@
   }
 
   function fillFaceboxFromAjax(href, klass) {
-    $.get(href, function(data) { $.facebox.reveal(data, klass) })
+    $.ajax({url:href, type:$.facebox.settings.type, 
+        success:function(data) { $.facebox.reveal(data, klass) }
+    });
   }
 
   function skipOverlay() {
